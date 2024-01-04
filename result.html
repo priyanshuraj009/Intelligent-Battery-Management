@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .battery-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .battery {
+            width: 100px;
+            height: 200px;
+            background-color: #f2f2f2;
+            border: 2px solid #000;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .battery-level {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-radius: 0 0 8px 8px;
+            height: {{ predicted_health }}%;
+            {% if predicted_health > 70 %}
+                background-color: #4caf50; /* green */
+            {% elif predicted_health > 30 %}
+                background-color: #ffcc00; /* yellow */
+            {% else %}
+                background-color: #ff4444; /* red */
+            {% endif %}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        <p>Predicted Battery Health: {{ predicted_health }}%</p>
+
+        <div class="battery-container">
+            <div class="battery">
+                <div class="battery-level"></div>
+            </div>
+        </div>
+
+        {% if predicted_health > 70 %}
+            <p style="color: #4caf50;">Battery health is good. Keep it well-maintained for a longer lifespan.</p>
+        {% elif predicted_health > 30 %}
+            <p style="color: #ffcc00;">Battery health is moderate. Follow operational suggestions to improve battery life.</p>
+            {% if battery_status == "On" %}
+                <p style="color: #ffcc00;">Charge the battery regularly and avoid extreme temperatures for better battery health.</p>
+            {% else %}
+                <p style="color: #ffcc00;">Operational suggestions:</p>
+                <ul>
+                    <li>Avoid extreme temperatures for better battery health.</li>
+                    <li>Consider reducing average daily kilometers for improved battery life.</li>
+                </ul>
+            {% endif %}
+        {% else %}
+            <p style="color: #ff4444;">Battery health is poor. Take immediate action to prevent battery damage.</p>
+            {% if battery_status == "On" %}
+                <p style="color: #ff4444;">Urgent: Extreme temperatures may damage the battery. Take precautions.</p>
+            {% else %}
+                <p style="color: #ff4444;">Operational suggestions:</p>
+                <ul>
+                    <li>Avoid extreme temperatures for better battery health.</li>
+                    <li>Limiting daily kilometers will help preserve battery life.</li>
+                    <li>Ensure proper charging practices for better battery maintenance.</li>
+                    <li>Regularly check for any signs of battery wear and tear.</li>
+                </ul>
+            {% endif %}
+        {% endif %}
+
+        <a href="/">Back to Input</a>
+    </div>
+</body>
+</html>
