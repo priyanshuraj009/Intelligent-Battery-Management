@@ -58,3 +58,6 @@ Contributions are welcome! Here’s how you can contribute to improve the Intell
     ```
 
 6. **Create a new Pull Request.**
+## Screenshots
+![Dashboard Screenshot](output/web-interface.png)
+![Result Screenshot](output/result.png)
