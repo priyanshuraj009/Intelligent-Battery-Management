@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-Wheeler Battery Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>2-Wheeler Battery Simulation</h1>
+        <form action="/process_input" method="post">
+            <label for="cycles">Cycles:</label>
+            <input type="number" name="cycles" required><br>
+
+            <label for="temperature">Temperature:</label>
+            <input type="number" name="temperature" required><br>
+
+            <label for="soc">State of Charge:</label>
+            <input type="number" name="soc" required><br>
+
+            <label for="kms">Average Kilometers Driven per Day:</label>
+            <input type="number" name="kms" required><br>
+
+            <label for="months_old">Months Old:</label>
+            <input type="number" name="months_old" required><br>
+
+            <button type="submit">Predict Battery Health</button>
+        </form>
+    </div>
+</body>
+</html>
